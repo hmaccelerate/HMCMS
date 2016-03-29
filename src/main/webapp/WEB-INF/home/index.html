@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>软件1122之家</title>
+
+    <!-- Bootstrap -->
+    <link href="/bootstrapDist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/bootstrapDist/css/common.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="/dwz/js/jquery-1.7.2.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/bootstrapDist/js/bootstrap.min.js"></script>
+
+    <script>
+        $(function(){
+            $.ajax({
+                url: "/home/getArticle.htm",
+                type: "POST",
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    var articleList = data.articleList;
+                    $.each(articleList, function (i, article) {
+                        var item = [
+                            "<div class='col-xs-12 col-md-6'><center> <article class='post'> <h2 class='post-title'>",
+                            "<a href='#'>",
+                            article.title,
+                            "</a></h2>",
+                            "<div class='lead thumbnail'>",
+                            article.content,
+                            "</div> </article> </center> </div>"
+                        ];
+                        console.log(item.join(''));
+                        var more=item.join('');
+                        $("#articleContent").append(more);
+                    });
+                }
+            });
+        });
+
+    </script>
+
+
+</head>
+<body>
+
+
+<div class="header" style="background-image: url(/common/images/bg.jpg)">
+    <div class="logoimg">
+        <img src="/common/images/logo.png" width="78"/>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="logotxt"><h1><a href="#">HMBlog</a></h1></div>
+                <h2 class="site-name text-center">记录生活的点滴</span></h2>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<main class="main">
+    <div class="container">
+        <div class="row" id="articleContent">
+            <!--<div class="col-xs-12 col-md-6">-->
+                <!--<center>-->
+                    <!--<article class="post">-->
+                        <!--<h2 class="post-title"><a href="">sdfdsf</a></h2>-->
+
+                        <!--<div class="lead thumbnail">sfdsfdsfsdf</div>-->
+                    <!--</article>-->
+                <!--</center>-->
+            <!--</div>-->
+        </div>
+    </div>
+</main>
+
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<script>
+    var getTopMenuUrl = "/menu/getTopMenuData.htm";
+    $.ajax({
+        url: getTopMenuUrl,
+        type: "POST",
+        dataType: "json",
+        async: false,
+        success: function (data) {
+            var statusCode = data.statusCode;
+            if (statusCode == 200) {
+                var menuList = data.menuList;
+                $.each(menuList, function (i, menu) {
+                    var item = "<li><a tname='menuIds' tvalue=" + menu.menu_id + ">" + menu.menu_name + "</a><ul id='fa_" + menu.menu_id + "'></ul></li>";
+                    $("#menuBody").append(item);
+                    var getSecondMenuUrl = "/menu/getSecondMenuData.htm";
+                    $.ajax({
+                        url: getSecondMenuUrl,
+                        data: {fa_id: menu.menu_id},
+                        type: "POST",
+                        async: false,
+                        success: function (data) {
+                            var secondMenuList = data.secondMenuList;
+                            $.each(secondMenuList, function (i, secondMenu) {
+                                var secondItem = "<li><a tname='menuIds' tvalue='" + secondMenu.menu_id + "'>" + secondMenu.menu_name + "</a></li>";
+                                $("#fa_" + menu.menu_id).append(secondItem);
+                            });
+                        }
+                    });
+                });
+            } else {
+                var message = data.message;
+                alert(message);
+            }
+        }
+    });
+    var getRoleMenuDataUrl = "/role/getRoleMenuData.htm";
+    $.ajax({
+        url: getRoleMenuDataUrl,
+        type: "POST",
+        dataType: "json",
+        async: false,
+        success: function (data) {
+            var role_id = data.role_id;
+            $("#role_id").val(role_id);
+            var menuList = data.menuList;
+            if (menuList == null) {
+                return;
+            }
+            var pas = $("#menuBody").find("a");
+            $.each(pas, function (i, item) {
+                $.each(menuList, function (i, menu) {
+                    console.log("menu_id: " + menu.menu_id);
+                    console.log("tvalue: " + $(item).attr("tvalue"));
+                    if (menu.menu_id == $(item).attr("tvalue")) {
+                        console.log("yes");
+                        $(item).attr("checked", true);
+                    }
+                });
+            });
+        }
+    });
+
+
+</script>
+<div>
+    <form method="post" action="/role/addRoleMenu.htm" class="pageForm required-validate"
+          onsubmit="return validateCallback(this)">
+        <input name="role_id" id="role_id" type="hidden"/>
+
+        <ul class="tree treeFolder treeCheck expand" id="menuBody">
+        </ul>
+        <div class="formBar">
+            <ul>
+                <li>
+                    <div class="buttonActive">
+                        <div class="buttonContent">
+                            <button type="submit">保存</button>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="button">
+                        <div class="buttonContent">
+                            <button type="button" class="close">取消</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </form>
+</div>

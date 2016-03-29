@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="User">
+    <insert id="addUser" parameterType="User" useGeneratedKeys="true" keyProperty="user_id">
+        INSERT INTO user (user_name, user_password, role_id, user_description, build_time)
+            VALUE (#{user_name}, #{user_password}, #{role_id}, #{user_description}, #{build_time})
+    </insert>
+
+    <select id="getUserPage" parameterType="map" resultType="User">
+        SELECT *
+        FROM user
+        LIMIT #{index}, #{pageSize}
+    </select>
+
+    <select id="countUser" resultType="int">
+        SELECT COUNT(*)
+        FROM user
+    </select>
+    <delete id="deleteUser" parameterType="map">
+        DELETE FROM user
+        WHERE user_id = #{user_id}
+    </delete>
+
+    <select id="getUserData" parameterType="map" resultType="User">
+        SELECT *
+        FROM user
+        WHERE user_id = #{user_id}
+    </select>
+    <update id="updateUser"  parameterType="User" flushCache="true">
+        UPDATE user
+        SET user_name = #{user_name}, user_password = #{user_password},role_id=#{role_id},user_description=#{user_description}
+        WHERE user_id = #{user_id}
+    </update>
+    <select id="loginCheck" parameterType="User" resultType="User">
+        SELECT *
+        FROM user
+        WHERE user_name= #{user_name} AND user_password=#{user_password}
+    </select>
+</mapper>

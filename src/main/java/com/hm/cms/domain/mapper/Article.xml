@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Article">
+    <insert id="addArticle" parameterType="Article" useGeneratedKeys="true" keyProperty="ac_id">
+        INSERT INTO article (user_id, title, content, up_time)
+            VALUE (#{user_id}, #{title}, #{content}, #{up_time})
+    </insert>
+
+    <select id="getArticlePage" parameterType="map" resultType="Article">
+        SELECT *
+        FROM article
+        LIMIT #{index}, #{pageSize}
+    </select>
+
+    <select id="countArticle" resultType="int">
+        SELECT COUNT(*)
+        FROM article
+    </select>
+
+    <delete id="deleteArticle" parameterType="map">
+        DELETE FROM article
+        WHERE ac_id = #{ac_id}
+    </delete>
+
+    <select id="getArticleData" parameterType="map" resultType="Article">
+        SELECT * FROM article WHERE ac_id=#{ac_id}
+    </select>
+    <update id="updateArticle" parameterType="map" flushCache="true">
+        UPDATE article SET title=#{title},content=#{content} WHERE ac_id=#{ac_id}
+    </update>
+    <select id="getAllArticle"  resultType="Article">
+        SELECT * FROM article
+    </select>
+</mapper>

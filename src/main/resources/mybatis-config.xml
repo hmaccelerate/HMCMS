@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias type="com.hm.cms.domain.Article" alias="Article"/>
+        <typeAlias type="com.hm.cms.domain.Menu" alias="Menu"/>
+        <typeAlias type="com.hm.cms.domain.Role" alias="Role"/>
+        <typeAlias type="com.hm.cms.domain.RoleMenu" alias="RoleMenu"/>
+        <typeAlias type="com.hm.cms.domain.User" alias="User"/>
+    </typeAliases>
+
+    <!--<mappers>-->
+        <!--<mapper resource="com/hm/cms/domain/mapper/Article.xml"/>-->
+        <!--<mapper resource="com/hm/cms/domain/mapper/Menu.xml"/>-->
+        <!--<mapper resource="com/hm/cms/domain/mapper/Role.xml"/>-->
+        <!--<mapper resource="com/hm/cms/domain/mapper/RoleMenu.xml"/>-->
+        <!--<mapper resource="com/hm/cms/domain/mapper/User.xml"/>-->
+    <!--</mappers>-->
+
+</configuration>

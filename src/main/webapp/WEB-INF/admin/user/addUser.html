@@ -1,0 +1,59 @@
+<script>
+    var url = "/user/updateAddUserUI.htm";
+    $.ajax({
+        url: url,
+        type: "POST",
+        dataType: "json",
+        success: function (data) {
+            var roleList = data.roleList;
+            $.each(roleList, function (i, role) {
+                var optionItem = "<option value='" + role.role_id + "'>" + role.role_name + "</option>"
+                $("#role_id").append(optionItem);
+            });
+        }
+    });
+</script>
+<div class="pageContent">
+    <form method="post" action="/user/addUser.htm" class="pageForm required-validate"
+          onsubmit="return validateCallback(this,navTabAjaxDone);">
+        <div class="pageFormContent" layoutH="56">
+            <p style="float: none">
+                <label>用户名：</label>
+                <input name="user_name" type="text" size="30" placeholder="请输入用户名"/>
+            </p>
+
+            <div>
+                <label>用户密码</label>
+                <input name="user_password" type="password" size="30" placeholder="请输入用户密码"/>
+            </div>
+            <div>
+                <label>角色选择</label>
+                <select name="role_id" id="role_id">
+                </select>
+            </div>
+           <div>
+                <label>用户描述</label>
+                <textarea name="user_description" rows="10" cols="50" placeholder="请输入用户描述"></textarea>
+           </div>
+            <div class="formBar">
+                <ul>
+                    <!--<li><a class="buttonActive" href="javascript:;"><span>保存</span></a></li>-->
+                    <li>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button type="submit">保存</button>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="button">
+                            <div class="buttonContent">
+                                <button type="button" class="close">取消</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>

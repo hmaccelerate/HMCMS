@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+		http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-2.5.xsd ">
+    <!--mvc的注解驱动-->
+    <!--<mvc:annotation-driven/>-->
+    <!-- 自动扫描与装配bean,一旦有扫描器的定义,mvc:annotation-driven不需要，扫描器中包含驱动-->
+    <context:component-scan base-package="com.hm"/>
+
+    <!--导入外部的配置文件-->
+    <bean id="propertiesConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--配置数据库连接池-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+        <property name="driverClassName" value="${driverClassName}"/>
+        <property name="url" value="${jdbcUrl}"/>
+        <property name="username" value="${userName}"/>
+        <property name="password" value="${passWord}"/>
+        <!--<property name="jdbcUrl" value="${jdbcUrl}"/>-->
+        <!--<property name="driverClass" value="${driverClassName}"/>-->
+        <!--<property name="user" value="${userName}"/>-->
+        <!--<property name="password" value="${passWord}"/>-->
+        <!--<property name="initialPoolSize" value="5"/>-->
+        <!--<property name="minPoolSize" value="5"/>-->
+        <!--<property name="maxPoolSize" value="10"/>-->
+        <!--<property name="acquireIncrement" value="3"/>-->
+        <!--<property name="maxStatements" value="18"/>-->
+        <!--<property name="maxStatementsPerConnection" value="18"/>-->
+        <!--<property name="maxIdleTime" value="60"/>-->
+    </bean>
+    <!-- session工厂-->
+    <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <property name="mapperLocations" value="classpath:com/hm/cms/domain/mapper/*.xml"/>
+    </bean>
+
+    <!-- 配置声明式事务管理-->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <tx:annotation-driven transaction-manager="txManager"/>
+
+</beans>

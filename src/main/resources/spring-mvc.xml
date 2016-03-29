@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-2.5.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!--mvc的注解驱动-->
+    <!--<mvc:annotation-driven/>-->
+    <!-- 自动扫描与装配bean,一旦有扫描器的定义,mvc:annotation-driven不需要，扫描器中包含驱动-->
+    <context:component-scan base-package="com.hm"/>
+
+    <!-- 内部资源视图解析器,前缀+ viewName +后缀 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- webroot到某一指定的文件夹的路径 -->
+        <property name="prefix" value="/WEB-INF/"></property>
+        <!-- 视图名称的后缀 -->
+        <property name="suffix" value=".html"></property>
+    </bean>
+
+    <!-- 文件上传解析器-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="10240000"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+    <!-- 拦截器-->
+    <!--<mvc:interceptors>-->
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/**/*"/>-->
+            <!--<bean class="com.hmaccelerate.interceptors.LoginInterceptor">-->
+            <!--</bean>-->
+        <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
+
+</beans>

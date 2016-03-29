@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Menu">
+        <insert id="addMenu" parameterType="Menu" useGeneratedKeys="true" keyProperty="menu_id">
+                INSERT INTO Menu (menu_name, menu_url)
+                VALUE (#{menu_name}, #{menu_url})
+        </insert>
+        <select id="getTopMenu" resultType="Menu">
+                SELECT * FROM menu WHERE fa_id=0
+        </select>
+        <select id="getSecondMenu" parameterType="map" resultType="Menu">
+                SELECT * FROM menu WHERE fa_id=#{menu_id}
+        </select>
+</mapper>

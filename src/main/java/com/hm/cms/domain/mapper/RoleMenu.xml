@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RoleMenu">
+    <delete id="delRoleMenu" parameterType="map">
+        DELETE FROM role_menu
+        WHERE role_id = #{role_id}
+    </delete>
+    <insert id="addRoleMenu" parameterType="map">
+        INSERT INTO role_menu (role_id, menu_id) VALUES (#{role_id}, #{menu_id})
+    </insert>
+    <select id="getRoleMenuData" parameterType="map" resultType="Menu">
+    SELECT
+            m.menu_id,
+            m.menu_name,
+            menu_url,
+            m.fa_id
+        FROM role_menu rm, menu m
+        WHERE rm.menu_id = m.menu_id AND rm.role_id = #{role_id}
+    </select>
+    <select id="getTopUserMenu" parameterType="map" resultType="Menu">
+        SELECT
+        m.menu_id,
+        m.menu_name,
+        menu_url
+        FROM role_menu rm, menu m
+        WHERE rm.menu_id = m.menu_id AND rm.role_id = #{role_id} AND fa_id=0
+    </select>
+    <select id="getSecondUserMenu" parameterType="map" resultType="Menu">
+        SELECT
+        m.menu_id,
+        m.menu_name,
+        menu_url
+        FROM role_menu rm, menu m
+        WHERE rm.menu_id = m.menu_id AND rm.role_id = #{role_id} AND m.fa_id=#{fa_id}
+    </select>
+</mapper>
