@@ -2,6 +2,7 @@ import com.hm.cms.domain.Article;
 import com.hm.cms.service.ArticleService;
 import com.hm.common.utils.Page;
 import com.hm.common.utils.QueryHelper;
+import org.apache.log4j.Logger;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -19,6 +20,7 @@ public class Test {
 
     @Autowired
     private ArticleService articleService;
+    static Logger log=Logger.getLogger(Test.class.getName());
 
     @org.junit.Test
     public void testAddArticle(){
@@ -34,11 +36,10 @@ public class Test {
 
     @org.junit.Test
     public void testgetArticlePage(){
-        Page<Article> page=articleService.getArticlePage(4, 3);
+        Page<Article> page=articleService.getArticlePage(1, 3);
         for (Article a:page.getRecordList()){
             System.out.println(a.getTitle());
         }
     }
-
 
 }

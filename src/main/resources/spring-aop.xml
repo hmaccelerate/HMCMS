@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop-3.0.xsd ">
+    <!-- bean definition & AOP specific configuration -->
+    <!--使用注解的方式配置Aop，需要添加如下的语句-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <!--<aop:config>-->
+        <!--&lt;!&ndash; 声明一个方面&ndash;&gt;-->
+        <!--<aop:aspect id="log" ref="logging">-->
+            <!--<aop:pointcut-->
+                    <!--id="articleServiceLog" expression="execution(* com.hm.cms.service.imp.ArticleServiceImpl.*(..))"/>-->
+            <!--<aop:after method="afterAdvice" pointcut-ref="articleServiceLog"/>-->
+        <!--</aop:aspect>-->
+    <!--</aop:config>-->
+
+    <!--&lt;!&ndash; Definition for logging aspect &ndash;&gt;-->
+    <!--<bean id="logging" class="com.hm.common.utils.LogAopUtil"/>-->
+</beans>

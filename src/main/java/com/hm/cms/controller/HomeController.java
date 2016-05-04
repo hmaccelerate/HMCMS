@@ -5,6 +5,7 @@ import com.hm.cms.domain.Article;
 import com.hm.cms.service.ArticleService;
 import com.hm.common.utils.QueryHelper;
 import com.hm.common.utils.ResponseUtil;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,5 +42,6 @@ public class HomeController {
         }
         System.out.println(object.toJSONString());
         ResponseUtil.renderJson(response, object.toJSONString());
+
     }
 }

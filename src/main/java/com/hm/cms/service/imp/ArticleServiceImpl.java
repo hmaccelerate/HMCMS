@@ -6,6 +6,7 @@ import com.hm.common.dao.DaoSupport;
 import com.hm.common.service.imp.ServiceSupport;
 import com.hm.common.utils.Page;
 import com.hm.common.utils.QueryHelper;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -7,9 +7,8 @@
 		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 		http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-2.5.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-    <!--mvc的注解驱动-->
-    <!--<mvc:annotation-driven/>-->
-    <!-- 自动扫描与装配bean,一旦有扫描器的定义,mvc:annotation-driven不需要，扫描器中包含驱动-->
+
+    <!-- 自动扫描与装配bean,一旦有扫描器的定义,mvc:annotation-driven不需要，因为扫描器中包含驱动-->
     <context:component-scan base-package="com.hm"/>
 
     <!-- 内部资源视图解析器,前缀+ viewName +后缀 -->

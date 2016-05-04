@@ -11,8 +11,9 @@
         http://www.springframework.org/schema/context/spring-context-2.5.xsd ">
     <!--mvc的注解驱动-->
     <!--<mvc:annotation-driven/>-->
-    <!-- 自动扫描与装配bean,一旦有扫描器的定义,mvc:annotation-driven不需要，扫描器中包含驱动-->
+    <!-- 扫描器:自动扫描与装配bean。不需要mvc:annotation-driven，扫描器中包含驱动-->
     <context:component-scan base-package="com.hm"/>
+    <import resource="spring-aop.xml"/>
 
     <!--导入外部的配置文件-->
     <bean id="propertiesConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -24,7 +25,7 @@
     </bean>
 
     <!--配置数据库连接池-->
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${driverClassName}"/>
         <property name="url" value="${jdbcUrl}"/>
         <property name="username" value="${userName}"/>
@@ -52,6 +53,7 @@
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
+    <!-- 注解驱动事务管理-->
     <tx:annotation-driven transaction-manager="txManager"/>
 
 </beans>
